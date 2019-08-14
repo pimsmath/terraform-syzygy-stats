@@ -72,7 +72,7 @@ resource "ansible_host" "stats" {
   inventory_hostname = "${var.environment_name}.${var.domain_name}"
   groups             = ["stats"]
 
-  vars {
+  vars = {
     ansible_user = "ptty2u"
 
     ansible_host            = openstack_networking_floatingip_v2.fip.address
