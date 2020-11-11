@@ -1,14 +1,17 @@
 terraform {
   # The configuration for this backend will be filled in by Terragrunt
-  backend "s3" {}
-}
-
-provider "ansible" {
-  version = "~>1.0"
-}
-
-provider "openstack" {
-  version = "~>1.0"
+  backend "s3" {
+  }
+  required_providers {
+    ansible = {
+      source = "nbering/ansible"
+      version = "~>1.0"
+    }
+    openstack = {
+      source = "terraform-provider-openstack/openstack"
+      version = "~>1.32"
+    }
+  }
 }
 
 resource "openstack_networking_floatingip_v2" "fip" {
